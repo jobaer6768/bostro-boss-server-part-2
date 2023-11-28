@@ -134,6 +134,13 @@ async function run() {
       res.send(result);
     })
 
+    app.post('/menu', verifyToken, verifyAdmin, async (req, res) => {
+      const menuItem = req.body;
+      const result = await menuCollection.insertOne(menuItem);
+      res.send(result);
+    })
+
+    // review related api
     app.get('/reviews', async (req, res) => {
       const result = await reviewCollection.find().toArray();
       res.send(result);
